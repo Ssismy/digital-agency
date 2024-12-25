@@ -2,12 +2,11 @@
 import React, { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import { getProviders, signIn, useSession } from "next-auth/react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { redirect, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 const Login = ({ url }) => {
   const session = useSession();
-  const router = useRouter();
   const params = useSearchParams();
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -22,7 +21,7 @@ const Login = ({ url }) => {
   }
 
   if (session.status === "authenticated") {
-    router?.push("/dashboard");
+    redirect("/dashboard");
   }
 
   const handleSubmit = (e) => {
